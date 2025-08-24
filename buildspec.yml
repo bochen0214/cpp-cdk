@@ -5,20 +5,18 @@ phases:
     runtime-versions:
       java: corretto17
     commands:
-      - echo Installing Java 17
-      - java -version
+      - echo Installing Maven...
+      - mvn --version
 
   build:
     commands:
-      - echo Build started on `date`
-      # 构建 Lambda 子模块
+      - echo Building Lambda project...
       - cd lambda
       - mvn clean package -DskipTests
       - cd ..
-      # 构建主项目
+      - echo Building CDK project...
       - mvn clean package -DskipTests
 
 artifacts:
   files:
-    - target/*.jar
-    - lambda/target/*.jar
+    - target/cpp-cdk.jar
